@@ -2,163 +2,41 @@ I want a section to show the people who come under the Ferrari racing f1 team. I
 I want you to arrange them and create the following design:
 
 
-Build a **premium 3D draggable carousel component** using **React (Next.js)**, **GSAP**, and the **Draggable plugin**, designed to integrate seamlessly into an existing modern, Ferrari-inspired website.
+Objective: Build a high-performance, cinematic 3D carousel using React, GSAP (with Draggable), and Vanilla CSS. The carousel should feature a series of "Driver Cards" arranged in a 3D elliptical orbit that users can drag to rotate infinitely.
 
----
+1. Structural Architecture
+3D Scene: Create a container with perspective: 2000px to host the carousel.
+The Ring: A central track div with transform-style: preserve-3d to maintain the 3D space for its children.
+The Cards: Absolute-positioned divs representing cards (suggested size: 420px x 525px).
+2. Mathematical Orbit Logic
+Arrange cards along an ellipse in 3D space using Math.sin() for X and Math.cos() for Z.
+Radius: Use a wide horizontal radius (e.g., 500px) and a shallower depth radius (e.g., 300px).
+Dynamic Visuals based on Depth (Z-axis):
+Scale: Cards in front should be 1.0 scale; cards in back should shrink to 0.6.
+Opacity: Cards in front 1.0 opacity; cards in back fade to 0.2.
+Z-Index: Dynamically set zIndex based on the Z-position to ensure correct layering.
+Rotation: Apply a slight rotationY tilt to cards based on their X-position to give a "curved" feel as they move.
+3. Interaction & Motion (GSAP)
+Infinite Draggable: Use GSAP Draggable on an invisible proxy element to capture horizontal drag.
+Progress Tracking: Map the drag distance to a progress variable. 1 unit of progress should represent one full card shift.
+Inertia & Snapping:
+Enable inertia: true so the carousel keeps spinning after a flick.
+Implement a snap function that ensures the carousel always settles with a card perfectly centered (round the progress to the nearest integer).
+Fluidity: Use gsap.set() or gsap.to() for high-performance updates on every frame during drag/throw.
+4. Visual Aesthetics & UI
+Background: A pure black (#000) section with a large, subtle radial gradient glow (rgba(220,0,0,0.1)) centered behind the carousel.
+Card Design:
+Rounded corners (16px) and a thin border (1px solid rgba(255,255,255,0.1)).
+A deep bottom-shadow for depth.
+A bottom-up black gradient overlay to make the text readable.
+Typography:
+Use Bebas Neue for large, aggressive titles and driver names.
+Use Rajdhani for technical details (Team Name, Section numbers).
+Large Background Numbers: Place a large, semi-transparent number (e.g., rgba(220,0,0,0.15)) behind the driver's name inside the card.
+5. Entrance Animation
+On mount, the cards should stagger into view from the bottom (y: 200) with opacity: 0 using a power3.out easing for a smooth, high-end reveal.
+Tech Stack Requirements:
 
-### 🎯 Objective
-
-Create a **cinematic 360° horizontal image carousel** where images are arranged in a circular 3D ring. The user should be able to **click/touch and drag horizontally** to rotate the ring smoothly with inertia, creating a high-end interactive experience.
-
----
-
-### 🧩 Component Requirements
-
-#### 1. Structure
-
-* Create a reusable React component named: `Draggable3DCarousel`
-* Main elements:
-
-  * A centered container with **perspective (2000px)**
-  * A `ring` element that holds all images in 3D space
-  * Multiple `.img` panels (at least 10)
-  * A full-screen invisible `dragger` layer for capturing interactions
-  * A `vignette` overlay for cinematic edge fading
-
----
-
-#### 2. 3D Layout
-
-* Use `transform-style: preserve-3d` for all relevant elements
-* Each image should:
-
-  * Be rotated along the Y-axis (`rotateY`) evenly (360 / total images)
-  * Be pushed outward using `translateZ` (~500px)
-  * Have `transform-origin: 50% 50% 500px`
-  * Have `backface-visibility: hidden`
-* Arrange images in a perfect circular ring
-
----
-
-#### 3. Visual Styling
-
-* Theme: **Ferrari-inspired**
-
-  * Background: pure black (`#000`)
-  * Accents: deep red, subtle glow
-* Images:
-
-  * Cover background (`background-size: cover`)
-  * Cinematic aspect ratio (wide panels)
-* Add a **vignette overlay**:
-
-  * Gradient fading from black on left/right edges
-* Ensure premium feel:
-
-  * smooth edges
-  * soft lighting illusion
-  * no harsh transitions
-
----
-
-#### 4. Entry Animation
-
-* On component mount:
-
-  * Animate images from:
-
-    * `y: 200`
-    * `opacity: 0`
-  * Use staggered animation
-  * Duration: ~1.5s
-  * Easing: `expo.out`
-
----
-
-#### 5. Drag Interaction (Core Feature)
-
-Use GSAP Draggable:
-
-* Capture horizontal drag input
-* On drag:
-
-  * Calculate difference between current and previous X position
-  * Rotate the `ring` using `rotationY`
-* Ensure:
-
-  * Smooth, fluid motion
-  * Continuous rotation (no hard limits)
-* Reset dragger position after drag ends
-
----
-
-#### 6. Parallax Effect (Important)
-
-* Each image must shift its **background-position dynamically**
-* Based on current `rotationY` of the ring
-* This creates a **depth/parallax illusion**
-* Update this continuously during rotation
-
----
-
-#### 7. Touch + Desktop Support
-
-* Support both:
-
-  * mouse drag
-  * touch swipe
-* Normalize touch events (`touches[0].clientX`)
-
----
-
-#### 8. Performance
-
-* Use `will-change: transform`
-* Avoid unnecessary re-renders
-* Handle GSAP logic inside `useEffect`
-* Keep animations GPU-accelerated
-
----
-
-### 📱 Responsiveness
-
-* Component should scale proportionally
-* Maintain 3D perspective on mobile
-* Ensure touch drag works smoothly
-
----
-
-### 🔌 Integration Notes
-
-* This section should be placed:
-
-  * after a splash screen OR
-  * as a featured showcase section
-* Must match:
-
-  * existing color palette
-  * motion design system
-  * typography
-
----
-
-### ✨ Optional Enhancements (if possible)
-
-* Snap rotation to nearest image
-* Highlight active/front-facing image
-* Add subtle blur to background images
-* Add scroll-triggered entrance using GSAP ScrollTrigger
-
----
-
-### 📦 Output Requirements
-
-* Clean, production-ready React component
-* Uses GSAP + Draggable correctly
-* Modular and reusable
-* Minimal, clean styling (CSS or Tailwind)
-* Easy to plug into existing project
-
----
-
-The final result should feel **high-end, interactive, and cinematic**, similar to a luxury automotive or product showcase experience.
+framer-motion (for basic layout animations)
+gsap & gsap/Draggable (for the 3D physics)
+next/image (if using Next.js) or standard <img> tags.

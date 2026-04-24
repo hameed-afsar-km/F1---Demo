@@ -5,6 +5,10 @@ The footer is revealed by the section above the footer, sliding up and showing a
 
 The footer should have a small navbar styled texts. The F1 Logo is present at the center bottom. So, make the other texts, social icons, etc., distributed at the lower bottom without overlapping at the center bottom.
 
+Add a return to top button at the bottom center, and the button should be, A circle icon with arrow-up text(glassmorphism, red glow on hover) and return to top text below it.
+
+The navbar should slide up in the footer section alone and return back when not in the footer section view.
+
 The cursor should have the following effect only in the footer:
 
 You are given a task to integrate an existing React component in the codebase

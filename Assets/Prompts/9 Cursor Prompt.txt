@@ -186,3 +186,6 @@ const useCanvasCursor = () => {
   }, []);
 };
 export default useCanvasCursor;
+
+
+The trail and the scattering of the cursor should be very very short. Also, the cursor should be a round outlined white circle, a bit of a medium size.

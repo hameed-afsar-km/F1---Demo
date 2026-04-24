@@ -1,8 +1,20 @@
 Have a title as: Experience it Yourself
 
-In this section, I want you to have a moving gradient background of dark red and dark gray with a spline model as overlay. 
+In this section, I want you to have a moving gradient background of dark red and dark gray with a 3d model as overlay. 
 
-Spline model Embed: <iframe src='https://my.spline.design/untitled-NdPsz8nX8oHgif51o90r7igf/' frameborder='0' width='100%' height='100%'></iframe>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+<model-viewer 
+  src="/model.glb"
+  alt="3D model"
+  auto-rotate
+  camera-controls
+  style="width: 100%; height: 500px; background: transparent;">
+</model-viewer>
+
+
+Use this for the glb model I have:
+scuderia_ferrari_f1_sf23_2023.glb
 
 
 The section should have proper animations and effects while appearing and finishing. Have a parallax effect of slide in and slide out when the section enters and the section ends.
