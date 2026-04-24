@@ -19,7 +19,7 @@ const SECTION_IDS: Record<string, string> = {
 };
 
 export default function Navbar({ revealed }: NavbarProps) {
-  const { setCursorText } = useCursor();
+  const { setCursorText, inFooter } = useCursor();
 
   const itemVariants = {
     hidden: { y: -60, opacity: 0, filter: "blur(8px)" },
@@ -51,8 +51,12 @@ export default function Navbar({ revealed }: NavbarProps) {
 
   return (
     <motion.nav
-      initial={{ opacity: 0 }}
-      animate={{ opacity: revealed ? 1 : 0 }}
+      initial={{ opacity: 0, y: -100 }}
+      animate={{ 
+        opacity: revealed ? 1 : 0,
+        y: (revealed && !inFooter) ? 0 : -100 
+      }}
+      transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
       style={{
         position: "fixed",
         top: 0,
@@ -65,7 +69,7 @@ export default function Navbar({ revealed }: NavbarProps) {
         padding: "20px 48px",
         background: "linear-gradient(180deg, rgba(0,0,0,0.85) 0%, transparent 100%)",
         backdropFilter: "blur(0px)",
-        pointerEvents: revealed ? "all" : "none",
+        pointerEvents: (revealed && !inFooter) ? "all" : "none",
       }}
     >
       {/* Left links */}
@@ -88,7 +92,7 @@ export default function Navbar({ revealed }: NavbarProps) {
               background: "none",
               border: "none",
               padding: 0,
-
+              cursor: "pointer",
               transition: "color 0.25s ease",
             }}
             whileHover={{ color: "#dc0000", scale: 1.05 } as never}
@@ -136,7 +140,7 @@ export default function Navbar({ revealed }: NavbarProps) {
               background: "none",
               border: "none",
               padding: 0,
-
+              cursor: "pointer",
               transition: "color 0.25s ease",
             }}
             whileHover={{ color: "#dc0000", scale: 1.05 } as never}

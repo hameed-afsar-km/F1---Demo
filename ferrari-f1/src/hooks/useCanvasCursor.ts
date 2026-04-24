@@ -13,31 +13,13 @@ export function useCanvasCursor(canvasRef: React.RefObject<HTMLCanvasElement | n
     const pos = { x: 0, y: 0 };
     let lines: Line[] = [];
     const E = {
-      debug: true,
+      debug: false,
       friction: 0.5,
-      trails: 20,
-      size: 50,
-      dampening: 0.25,
+      trails: 6,
+      size: 12,
+      dampening: 0.2,
       tension: 0.98,
     };
-
-    class Oscillator {
-      phase: number;
-      offset: number;
-      frequency: number;
-      amplitude: number;
-
-      constructor(e: any = {}) {
-        this.phase = e.phase || 0;
-        this.offset = e.offset || 0;
-        this.frequency = e.frequency || 0.001;
-        this.amplitude = e.amplitude || 1;
-      }
-      update() {
-        this.phase += this.frequency;
-        return this.offset + Math.sin(this.phase) * this.amplitude;
-      }
-    }
 
     class Node {
       x: number = 0;
@@ -109,12 +91,7 @@ export function useCanvasCursor(canvasRef: React.RefObject<HTMLCanvasElement | n
       }
     }
 
-    const f = new Oscillator({
-      phase: Math.random() * 2 * Math.PI,
-      amplitude: 15,
-      frequency: 0.0015,
-      offset: 0,
-    });
+
 
     function render() {
       if (!running) return;
@@ -122,7 +99,7 @@ export function useCanvasCursor(canvasRef: React.RefObject<HTMLCanvasElement | n
         ctx.globalCompositeOperation = "source-over";
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.globalCompositeOperation = "lighter";
-        ctx.strokeStyle = "hsla(" + Math.round(f.update()) + ", 100%, 50%, 0.5)";
+        ctx.strokeStyle = "rgba(220, 0, 0, 0.8)";
         ctx.lineWidth = 1;
         for (let e = 0; e < E.trails; e++) {
           if (lines[e]) {

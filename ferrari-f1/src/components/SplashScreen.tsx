@@ -65,7 +65,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             fill
             style={{
               objectFit: "contain",
-              filter: "brightness(0) invert(1) drop-shadow(0 0 30px rgba(255,255,255,0.7)) drop-shadow(0 0 60px rgba(255,255,255,0.3))",
+              filter: "brightness(0) invert(1) drop-shadow(0 0 15px rgba(255,255,255,0.4)) drop-shadow(0 0 30px rgba(255,255,255,0.15))",
             }}
             priority
           />
