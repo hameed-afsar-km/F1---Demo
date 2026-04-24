@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Spline from '@splinetool/react-spline/next';
 
 export default function ExperienceSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -83,9 +84,8 @@ export default function ExperienceSection() {
 
         {/* Spline embed */}
         <div style={{ flex: 1, position: "relative", margin: "32px 0 0" }}>
-          <div 
-            style={{ width: "100%", height: "100%", display: "block", border: "none" }}
-            dangerouslySetInnerHTML={{ __html: "<iframe src='https://my.spline.design/untitled-NdPsz8nX8oHgif51o90r7igf/' frameborder='0' width='100%' height='100%'></iframe>" }}
+          <Spline
+            scene="https://prod.spline.design/US8GdoAmjxw4k1Yl/scene.splinecode"
           />
           {/* Side vignettes */}
           <div style={{
