@@ -77,15 +77,28 @@ export default function ExperienceSection() {
             letterSpacing: "0.1em",
             marginTop: 8,
           }}>
-            Interact with the SF-25 in full 3D
+            Interact with the SF-23 in full 3D
           </p>
         </div>
 
-        {/* Spline embed */}
+        {/* Model Viewer embed */}
         <div style={{ flex: 1, position: "relative", margin: "32px 0 0" }}>
           <div
             style={{ width: "100%", height: "100%", display: "block", border: "none" }}
-            dangerouslySetInnerHTML={{ __html: "<iframe src='https://my.spline.design/untitled-NdPsz8nX8oHgif51o90r7igf/' frameborder='0' width='100%' height='100%' style='background: transparent;' allowtransparency='true'></iframe>" }}
+            dangerouslySetInnerHTML={{ __html: `
+              <model-viewer 
+                src="/scuderia_ferrari_f1_sf23_2023.glb"
+                alt="Ferrari F1 SF-23 3D Model"
+                auto-rotate
+                camera-controls
+                ar
+                shadow-intensity="1"
+                environment-image="neutral"
+                exposure="1"
+                interaction-prompt="auto"
+                style="width: 100%; height: 100%; background: transparent; --poster-color: transparent;">
+              </model-viewer>
+            ` }}
           />
           {/* Side vignettes */}
           <div style={{

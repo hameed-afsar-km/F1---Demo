@@ -3,6 +3,7 @@ import "./globals.css";
 import { CursorProvider } from "@/context/CursorContext";
 import CanvasCursor from "@/components/CanvasCursor";
 import MainCursor from "@/components/MainCursor";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ferrari-f1.vercel.app"),
@@ -28,6 +29,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        <Script 
+          type="module" 
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" 
+          strategy="lazyOnload"
+        />
         <CursorProvider>
 
           <MainCursor />

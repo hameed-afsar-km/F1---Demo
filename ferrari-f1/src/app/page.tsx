@@ -60,7 +60,7 @@ export default function HomePage() {
           <DriversSection />
         </section>
 
-        {/* Section 6: Experience (Spline 3D embed) */}
+        {/* Section 6: Experience (Model Viewer GLB embed) */}
         <section id="experience">
           <ExperienceSection />
         </section>

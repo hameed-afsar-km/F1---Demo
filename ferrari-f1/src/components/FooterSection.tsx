@@ -100,7 +100,7 @@ export default function FooterSection() {
                 position: "absolute",
                 bottom: "120px",
                 left: "50%",
-                transform: "translateX(-50%)",
+                x: "-50%",
                 zIndex: 100,
                 display: "flex",
                 flexDirection: "column",
@@ -108,8 +108,15 @@ export default function FooterSection() {
                 gap: 12,
               }}
             >
-              <button
+              <motion.button
                 onClick={scrollToTop}
+                whileHover={{ 
+                  scale: 1.1,
+                  backgroundColor: "#dc0000",
+                  borderColor: "#dc0000",
+                  boxShadow: "0 0 30px rgba(220,0,0,0.6)"
+                }}
+                whileTap={{ scale: 0.95 }}
                 style={{
                   width: 54,
                   height: 54,
@@ -123,23 +130,11 @@ export default function FooterSection() {
                   justifyContent: "center",
                   color: "#fff",
                   fontSize: "20px",
-                  transition: "all 0.3s cubic-bezier(0.23, 1, 0.32, 1)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "#dc0000";
-                  e.currentTarget.style.borderColor = "#dc0000";
-                  e.currentTarget.style.boxShadow = "0 0 30px rgba(220,0,0,0.6)";
-                  e.currentTarget.style.transform = "scale(1.1)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(255,255,255,0.05)";
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
-                  e.currentTarget.style.boxShadow = "none";
-                  e.currentTarget.style.transform = "scale(1)";
+                  transition: "border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease",
                 }}
               >
                 ↑
-              </button>
+              </motion.button>
               <span style={{
                 fontFamily: "'Rajdhani', sans-serif",
                 fontSize: "10px",
