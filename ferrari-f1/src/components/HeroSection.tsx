@@ -23,6 +23,10 @@ export default function HeroSection({ onEnter }: HeroSectionProps) {
     const onMove = (e: MouseEvent) => {
       const cx = window.innerWidth / 2;
       const cy = window.innerHeight / 2;
+      if (zooming || videoStarted) {
+        setParallax({ x: 0, y: 0 });
+        return;
+      }
       setParallax({
         x: ((e.clientX - cx) / cx) * 12,
         y: ((e.clientY - cy) / cy) * 8,
@@ -30,14 +34,15 @@ export default function HeroSection({ onEnter }: HeroSectionProps) {
     };
     window.addEventListener("mousemove", onMove);
     return () => window.removeEventListener("mousemove", onMove);
-  }, []);
+  }, [zooming, videoStarted]);
 
   const handleSlideComplete = () => {
     setCursorDisabled(true);
     setZooming(true);
     setTimeout(() => {
       setVideoStarted(true);
-    }, 1000); // Wait for zoom out to reach peak velocity
+    }, 1000);
+    setParallax({ x: 0, y: 0 });
     onEnter();
   };
 

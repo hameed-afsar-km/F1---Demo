@@ -2,5 +2,5 @@ The navbar is in this model, Ferrari Logo at the center, Features & Mechanisms a
 
 I want the navbar to have a proper animation this way:
 
-When the splash screen completes, the navbar should have nothing, hidden completely. Then, when the user slides the CTA, the navbar should reveal the buttons one after the other, in couples.
+When the splash screen completes, the navbar should have nothing, hidden completely. Then, when the user slides the CTA, after 9 seconds the navbar should reveal the buttons one after the other, in couples.
 Features at the left last and Experience It at the right last should slide from top first with smooth ramp speed curve. Then Mechanism and Drivers should slide in with the same animation style. Then, the Ferrari logo should unblur and reveal itself. It should have a proper, evenly distributed timing and smooth animation.

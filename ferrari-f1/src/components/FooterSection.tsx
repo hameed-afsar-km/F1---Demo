@@ -25,9 +25,9 @@ export default function FooterSection() {
   const y1 = useTransform(scrollYProgress, [0, 1], ["30%", "0%"]);
   const y3 = useTransform(scrollYProgress, [0, 1], ["30%", "0%"]);
   const y2 = useTransform(scrollYProgress, [0, 1], ["-30%", "0%"]);
-  // Opacity: 0 to 1 as we scroll through the section
-  const layerOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const layer2Opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  // Opacity: 0 to 1 as we scroll into the section (reaches 100% halfway)
+  const layerOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+  const layer2Opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
 
   return (
     <footer
@@ -36,215 +36,230 @@ export default function FooterSection() {
       style={{
         position: "relative",
         width: "100%",
-        minHeight: "100vh",
-        background: "#000",
-        overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
+        height: "100vh",
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", // Forces clipping context for the fixed child
       }}
     >
-      {/* Parallax layer 1 — base image with WebGL distortion */}
       <motion.div
         style={{
-          position: "absolute",
-          inset: 0,
-          y: y1,
-          opacity: layerOpacity,
-          zIndex: 2,
-        }}
-      >
-        <GridDistortionBackground 
-          imageSrc="/footer/1.png"
-          grid={20}
-          mouse={0.15}
-          strength={0.2}
-          relaxation={0.96}
-        />
-      </motion.div>
-
-      {/* Parallax layer 2 — text image, from top */}
-      <motion.div
-        style={{
-          position: "absolute",
-          inset: 0,
-          y: y2,
-          opacity: layer2Opacity,
-          zIndex: 3,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <div style={{ position: "relative", width: "100%", height: "100%" }}>
-          <Image
-            src="/footer/2.png"
-            alt="Footer text layer"
-            fill
-            style={{ objectFit: "contain", objectPosition: "center" }}
-          />
-        </div>
-      </motion.div>
-
-      {/* Parallax layer 3 — top overlay */}
-      <motion.div
-        style={{
-          position: "absolute",
-          inset: 0,
-          y: y3,
-          opacity: layerOpacity,
-          zIndex: 4,
-        }}
-      >
-        <Image
-          src="/footer/3.png"
-          alt="Footer overlay"
-          fill
-          style={{ objectFit: "cover", objectPosition: "center top" }}
-        />
-      </motion.div>
-
-      {/* Dark gradient overlay */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.85) 100%)",
-          zIndex: 5,
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* Footer UI content */}
-      <div
-        style={{
-          position: "relative",
-          zIndex: 10,
-          marginTop: "auto",
+          position: "fixed",
+          bottom: 0,
+          left: 0,
           width: "100%",
+          height: "100vh",
+          background: "#000",
+          display: "flex",
+          flexDirection: "column",
+          opacity: layerOpacity,
         }}
       >
-        {/* Nav links row */}
-        <div
+        {/* Parallax layer 1 — base image with WebGL distortion */}
+        <motion.div
           style={{
+            position: "absolute",
+            inset: 0,
+            y: y1,
+            zIndex: 2,
+          }}
+        >
+          <GridDistortionBackground
+            imageSrc="/footer/1.png"
+            grid={20}
+            mouse={0.15}
+            strength={0.2}
+            relaxation={0.96}
+          />
+        </motion.div>
+
+        {/* Parallax layer 2 — text image, from top */}
+        <motion.div
+          style={{
+            position: "absolute",
+            inset: 0,
+            y: y2,
+            zIndex: 3,
             display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            padding: "0 64px 32px",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          {/* Left links */}
-          <div style={{ display: "flex", gap: 32 }}>
-            {NAV_LINKS.slice(0, 3).map((link) => (
-              <a
-                key={link}
-                href="#"
-                style={{
-                  fontFamily: "'Rajdhani', sans-serif",
-                  fontSize: "11px",
-                  fontWeight: 600,
-                  letterSpacing: "0.3em",
-                  textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.5)",
-                  textDecoration: "none",
-                  transition: "color 0.2s ease",
-                }}
-                onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = "#dc0000")}
-                onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = "rgba(255,255,255,0.5)")}
-              >
-                {link}
-              </a>
-            ))}
+          <div style={{ position: "relative", width: "100%", height: "100%" }}>
+            <Image
+              src="/footer/2.png"
+              alt="Footer text layer"
+              fill
+              style={{ objectFit: "cover", objectPosition: "center" }}
+            />
           </div>
+        </motion.div>
 
-          {/* Right links + social */}
-          <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
-            {NAV_LINKS.slice(3).map((link) => (
-              <a
-                key={link}
-                href="#"
-                style={{
-                  fontFamily: "'Rajdhani', sans-serif",
-                  fontSize: "11px",
-                  fontWeight: 600,
-                  letterSpacing: "0.3em",
-                  textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.5)",
-                  textDecoration: "none",
-                  transition: "color 0.2s ease",
-                }}
-                onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = "#dc0000")}
-                onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = "rgba(255,255,255,0.5)")}
-              >
-                {link}
-              </a>
-            ))}
-            <div style={{ width: 1, height: 16, background: "rgba(255,255,255,0.15)" }} />
-            {SOCIAL.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                style={{
-                  fontFamily: "'Rajdhani', sans-serif",
-                  fontSize: "11px",
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.35)",
-                  textDecoration: "none",
-                  transition: "color 0.2s ease",
-                }}
-                onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = "#fff")}
-                onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = "rgba(255,255,255,0.35)")}
-              >
-                {s.label}
-              </a>
-            ))}
-          </div>
-        </div>
+        {/* Parallax layer 3 — top overlay */}
+        <motion.div
+          style={{
+            position: "absolute",
+            inset: 0,
+            y: y3,
+            zIndex: 4,
+          }}
+        >
+          <Image
+            src="/footer/3.png"
+            alt="Footer overlay"
+            fill
+            style={{ objectFit: "cover", objectPosition: "center" }}
+          />
+        </motion.div>
 
-        {/* Divider */}
-        <div style={{
-          height: 1,
-          background: "linear-gradient(90deg, transparent, rgba(220,0,0,0.4), transparent)",
-          margin: "0 64px",
-        }} />
-
-        {/* Bottom row with centered logo */}
+        {/* Dark gradient overlay */}
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr auto 1fr",
-            alignItems: "center",
-            padding: "24px 64px 40px",
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.85) 100%)",
+            zIndex: 5,
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* Footer UI content */}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 10,
+            marginTop: "auto",
+            width: "100%",
           }}
         >
-          {/* Left — copyright */}
-          <p style={{
-            fontFamily: "'Rajdhani', sans-serif",
-            fontSize: "10px",
-            letterSpacing: "0.25em",
-            color: "rgba(255,255,255,0.2)",
-            textTransform: "uppercase",
-          }}>
-            © 2025 Scuderia Ferrari HP. All rights reserved.
-          </p>
+          {/* Nav links row */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              padding: "0 64px 32px",
+            }}
+          >
+            {/* Left links */}
+            <div style={{ display: "flex", gap: 32 }}>
+              {NAV_LINKS.slice(0, 3).map((link) => (
+                <a
+                  key={link}
+                  href="#"
+                  style={{
+                    fontFamily: "'Rajdhani', sans-serif",
+                    fontSize: "11px",
+                    fontWeight: 600,
+                    letterSpacing: "0.3em",
+                    textTransform: "uppercase",
+                    color: "rgba(255,255,255,0.5)",
+                    textDecoration: "none",
+                    transition: "color 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = "#dc0000")}
+                  onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = "rgba(255,255,255,0.5)")}
+                >
+                  {link}
+                </a>
+              ))}
+            </div>
 
-          {/* Center — Empty since F1 Logo is removed */}
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            {/* Right links + social */}
+            <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
+              {NAV_LINKS.slice(3).map((link) => (
+                <a
+                  key={link}
+                  href="#"
+                  style={{
+                    fontFamily: "'Rajdhani', sans-serif",
+                    fontSize: "11px",
+                    fontWeight: 600,
+                    letterSpacing: "0.3em",
+                    textTransform: "uppercase",
+                    color: "rgba(255,255,255,0.5)",
+                    textDecoration: "none",
+                    transition: "color 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = "#dc0000")}
+                  onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = "rgba(255,255,255,0.5)")}
+                >
+                  {link}
+                </a>
+              ))}
+              <div style={{ width: 1, height: 16, background: "rgba(255,255,255,0.15)" }} />
+              {SOCIAL.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  style={{
+                    fontFamily: "'Rajdhani', sans-serif",
+                    fontSize: "11px",
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    color: "rgba(255,255,255,0.35)",
+                    textDecoration: "none",
+                    transition: "color 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = "#fff")}
+                  onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = "rgba(255,255,255,0.35)")}
+                >
+                  {s.label}
+                </a>
+              ))}
+            </div>
           </div>
 
-          {/* Right — legal */}
-          <p style={{
-            fontFamily: "'Rajdhani', sans-serif",
-            fontSize: "10px",
-            letterSpacing: "0.25em",
-            color: "rgba(255,255,255,0.2)",
-            textTransform: "uppercase",
-            textAlign: "right",
-          }}>
-            Formula 1® is a registered trademark of Formula One Licensing BV
-          </p>
+          {/* Divider */}
+          <div style={{
+            height: 1,
+            background: "linear-gradient(90deg, transparent, rgba(220,0,0,0.4), transparent)",
+            margin: "0 64px",
+          }} />
+
+          {/* Bottom row with centered F1 logo */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr auto 1fr",
+              alignItems: "center",
+              padding: "24px 64px 40px",
+            }}
+          >
+            {/* Left — copyright */}
+            <p style={{
+              fontFamily: "'Rajdhani', sans-serif",
+              fontSize: "10px",
+              letterSpacing: "0.25em",
+              color: "rgba(255,255,255,0.2)",
+              textTransform: "uppercase",
+            }}>
+              © 2025 Scuderia Ferrari HP. All rights reserved.
+            </p>
+
+            {/* Center — F1 Logo */}
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+              <div style={{
+                position: "relative",
+                width: 60,
+                height: 24,
+                opacity: 0.8,
+              }}>
+              </div>
+            </div>
+
+            {/* Right — legal */}
+            <p style={{
+              fontFamily: "'Rajdhani', sans-serif",
+              fontSize: "10px",
+              letterSpacing: "0.25em",
+              color: "rgba(255,255,255,0.2)",
+              textTransform: "uppercase",
+              textAlign: "right",
+            }}>
+              Formula 1® is a registered trademark of Formula One Licensing BV
+            </p>
+          </div>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 }

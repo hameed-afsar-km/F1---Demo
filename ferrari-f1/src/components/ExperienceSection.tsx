@@ -83,12 +83,9 @@ export default function ExperienceSection() {
 
         {/* Spline embed */}
         <div style={{ flex: 1, position: "relative", margin: "32px 0 0" }}>
-          <iframe
-            src="https://my.spline.design/untitled-NdPsz8nX8oHgif51o90r7igf/"
-            frameBorder={0}
+          <div 
             style={{ width: "100%", height: "100%", display: "block", border: "none" }}
-            allow="fullscreen"
-            title="Ferrari 3D Experience"
+            dangerouslySetInnerHTML={{ __html: "<iframe src='https://my.spline.design/untitled-NdPsz8nX8oHgif51o90r7igf/' frameborder='0' width='100%' height='100%'></iframe>" }}
           />
           {/* Side vignettes */}
           <div style={{
