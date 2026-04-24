@@ -52,9 +52,9 @@ export default function Navbar({ revealed }: NavbarProps) {
   return (
     <motion.nav
       initial={{ opacity: 0, y: -100 }}
-      animate={{ 
+      animate={{
         opacity: revealed ? 1 : 0,
-        y: (revealed && !inFooter) ? 0 : -100 
+        y: (revealed && !inFooter) ? 0 : -100
       }}
       transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
       style={{

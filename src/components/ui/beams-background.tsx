@@ -28,12 +28,12 @@ function createBeam(width: number, height: number): Beam {
     return {
         x: Math.random() * width * 1.5 - width * 0.25,
         y: Math.random() * height * 1.5 - height * 0.25,
-        width: 30 + Math.random() * 60,
+        width: 40 + Math.random() * 120, // Wider beams
         length: height * 2.5,
         angle: angle,
         speed: 0.6 + Math.random() * 1.2,
-        opacity: 0.12 + Math.random() * 0.16,
-        hue: Math.random() * 15, // Ferrari Red tones (0-15)
+        opacity: 0.20 + Math.random() * 0.20, // Increased opacity
+        hue: Math.random() * 12, // Ferrari Red tones (0-12)
         pulse: Math.random() * Math.PI * 2,
         pulseSpeed: 0.02 + Math.random() * 0.03,
     };
@@ -46,12 +46,12 @@ export function BeamsBackground({
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const beamsRef = useRef<Beam[]>([]);
     const animationFrameRef = useRef<number>(0);
-    const MINIMUM_BEAMS = 20;
+    const MINIMUM_BEAMS = 25; // More beams
 
     const opacityMap = {
         subtle: 0.7,
-        medium: 0.85,
-        strong: 1,
+        medium: 1.0,
+        strong: 1.5, // Overdrive
     };
 
     useEffect(() => {
@@ -80,7 +80,7 @@ export function BeamsBackground({
 
         function resetBeam(beam: Beam, index: number, totalBeams: number) {
             if (!canvas) return beam;
-            
+
             const column = index % 3;
             const spacing = canvas.width / 3;
 
@@ -89,10 +89,10 @@ export function BeamsBackground({
                 column * spacing +
                 spacing / 2 +
                 (Math.random() - 0.5) * spacing * 0.5;
-            beam.width = 100 + Math.random() * 100;
+            beam.width = 150 + Math.random() * 150; // Wider
             beam.speed = 0.5 + Math.random() * 0.4;
-            beam.hue = (index * 15) / totalBeams; // Red tones
-            beam.opacity = 0.2 + Math.random() * 0.1;
+            beam.hue = (index * 12) / totalBeams; // Red tones
+            beam.opacity = 0.35 + Math.random() * 0.25; // Increased
             return beam;
         }
 

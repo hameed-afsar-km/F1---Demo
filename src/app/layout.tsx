@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "The official cinematic experience for Scuderia Ferrari HP. Discover the SF-25, our drivers, and the engineering that defines victory.",
   keywords: ["Ferrari", "F1", "Formula 1", "Scuderia Ferrari", "SF-25", "Racing"],
   icons: {
-    icon: "/f1-logo.png",
+    icon: "/F1.png",
   },
   openGraph: {
     title: "Ferrari F1",
