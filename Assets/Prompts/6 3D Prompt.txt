@@ -1,0 +1,8 @@
+Have a title as: Experience it Yourself
+
+In this section, I want you to have a moving gradient background of dark red and dark gray with a spline model as overlay. 
+
+Spline model Embed: <iframe src='https://my.spline.design/untitled-NdPsz8nX8oHgif51o90r7igf/' frameborder='0' width='100%' height='100%'></iframe>
+
+
+The section should have proper animations and effects while appearing and finishing. Have a parallax effect of slide in and slide out when the section enters and the section ends.

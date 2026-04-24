@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --ferrari-red: #dc0000;
+  --ferrari-red-deep: #8b0000;
+  --ferrari-red-glow: rgba(220, 0, 0, 0.6);
+  --ferrari-white: #ffffff;
+  --ferrari-black: #000000;
+  --ferrari-gray: #111111;
+  --ferrari-gray-mid: #1a1a1a;
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  overflow-x: hidden;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Hide default cursor globally */
+*, *::before, *::after {
+  cursor: none !important;
+}
+
+
+
+/* Canvas cursor trail */
+#cursor-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999999;
+}
+
+/* Main white outline cursor */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1000000;
+  transform: translate(-50%, -50%);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #000;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ferrari-red);
+  border-radius: 2px;
+}
+
+/* Typography */
+.font-bebas { font-family: 'Bebas Neue', sans-serif; }
+.font-rajdhani { font-family: 'Rajdhani', sans-serif; }
+
+/* Glass effect */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
+
+/* Red glow text */
+.text-glow-red {
+  text-shadow: 0 0 20px rgba(220, 0, 0, 0.8), 0 0 40px rgba(220, 0, 0, 0.4);
+}
+
+/* White glow */
+.glow-white {
+  filter: drop-shadow(0 0 20px rgba(255,255,255,0.8)) drop-shadow(0 0 40px rgba(255,255,255,0.4));
+}
+
+/* Section base */
+.section-full {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Vignette */
+.vignette {
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.95) 100%);
+}
+
+/* Horizontal scroll track */
+.h-scroll-track {
+  display: flex;
+  flex-direction: row;
+  will-change: transform;
+}
+
+/* LightBeamButton @property animation */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate-border {
+  to { --angle: 360deg; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(220,0,0,0.4), 0 0 40px rgba(220,0,0,0.2); }
+  50% { box-shadow: 0 0 30px rgba(220,0,0,0.7), 0 0 60px rgba(220,0,0,0.4); }
+}
+
+/* Scroll-to-race animation */
+@keyframes scroll-pulse {
+  0% { transform: scaleX(0); opacity: 0; }
+  50% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(0) translateX(100%); opacity: 0; }
+}
+
+@keyframes flag-wave {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-4px) rotate(2deg); }
+  75% { transform: translateY(4px) rotate(-2deg); }
+}
+
+
+
+/* Gradient background for experience section */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-animate {
+  background: linear-gradient(-45deg, #0a0000, #1a0000, #0d0000, #200000, #000000);
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
+}
+
+/* Feature card */
+.feature-card {
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card img {
+  transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+.feature-card:hover img {
+  transform: scale(1.05);
+}
+
+/* 3D Carousel */
+.carousel-scene {
+  width: 100%;
+  height: 100%;
+  perspective: 2000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-ring {
+  position: relative;
+  width: 220px;
+  height: 275px;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+}
+
+.driver-card {
+  position: absolute;
+  width: 220px;
+  height: 275px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid rgba(220,0,0,0.3);
+  box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.5);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* Loco scroll */
+html.has-scroll-smooth {
+  overflow: hidden;
+}
+
+/* Remove default focus outlines for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}

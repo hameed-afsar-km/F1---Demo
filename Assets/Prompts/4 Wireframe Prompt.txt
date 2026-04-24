@@ -1,0 +1,3 @@
+This section appears as a slide in as we scroll, from bottom(like a parallax effect).
+In this section, I want you to use gsap controlled trigger to smoothly animate the frames as I scroll. The video is converted into frames and arranged in order in the folder 'scroll-animation'. i want you to implement the scroll scrub feature alone with smoll scroll effect. Make sure that the scroll isn't stuttering.
+The section then slides above when the video ends(like a parallax effect).
