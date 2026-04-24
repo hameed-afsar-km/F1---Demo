@@ -7,11 +7,14 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ferrari-f1.vercel.app"),
-  title: "Scuderia Ferrari HP — Formula 1",
+  title: "Ferrari F1",
   description: "The official cinematic experience for Scuderia Ferrari HP. Discover the SF-25, our drivers, and the engineering that defines victory.",
   keywords: ["Ferrari", "F1", "Formula 1", "Scuderia Ferrari", "SF-25", "Racing"],
+  icons: {
+    icon: "/f1-logo.png",
+  },
   openGraph: {
-    title: "Scuderia Ferrari HP — Formula 1",
+    title: "Ferrari F1",
     description: "The cinematic Ferrari F1 experience.",
     images: ["/F1.png"],
   },
