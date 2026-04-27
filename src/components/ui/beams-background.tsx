@@ -46,7 +46,7 @@ export function BeamsBackground({
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const beamsRef = useRef<Beam[]>([]);
     const animationFrameRef = useRef<number>(0);
-    const MINIMUM_BEAMS = 25; // More beams
+    const MINIMUM_BEAMS = 15; // Optimized for performance
 
     const opacityMap = {
         subtle: 0.7,
@@ -138,7 +138,7 @@ export function BeamsBackground({
             if (!canvas || !ctx) return;
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.filter = "blur(35px)";
+            // Removed expensive ctx.filter = "blur(35px)";
 
             const totalBeams = beamsRef.current.length;
             beamsRef.current.forEach((beam, index) => {
@@ -190,7 +190,7 @@ export function BeamsBackground({
                     repeat: Number.POSITIVE_INFINITY,
                 }}
                 style={{
-                    backdropFilter: "blur(50px)",
+                    backgroundColor: "rgba(10, 10, 10, 0.1)", // Simplified overlay
                 }}
             />
 

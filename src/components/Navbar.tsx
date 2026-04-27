@@ -107,7 +107,7 @@ export default function Navbar({ revealed }: NavbarProps) {
         variants={logoVariants}
         initial="hidden"
         animate={revealed ? "visible" : "hidden"}
-        style={{ flex: "0 0 auto" }}
+        style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center" }}
       >
         <img
           src="/F1.png"
@@ -118,6 +118,17 @@ export default function Navbar({ revealed }: NavbarProps) {
             display: "block",
           }}
         />
+        <div className="md:hidden" style={{
+          fontFamily: "'Rajdhani', sans-serif",
+          fontSize: "8px",
+          fontWeight: 500,
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+          color: "rgba(255,255,255,0.4)",
+          marginTop: "4px"
+        }}>
+          Best in Landscape
+        </div>
       </motion.div>
 
       {/* Right links */}

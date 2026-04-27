@@ -21,9 +21,9 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
       initial={{ y: 0, filter: "blur(0px)" }}
       exit={{
         y: "-100vh",
-        filter: "blur(20px)",
+        opacity: 0,
         transition: {
-          duration: 1.0,
+          duration: 0.8,
           ease: [0.76, 0, 0.24, 1],
         },
       }}
@@ -65,10 +65,32 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             fill
             style={{
               objectFit: "contain",
-              filter: "brightness(0) invert(1) drop-shadow(0 0 15px rgba(255,255,255,0.4)) drop-shadow(0 0 30px rgba(255,255,255,0.15))",
+              filter: "brightness(0) invert(1) drop-shadow(0 0 10px rgba(255,255,255,0.3))",
             }}
             priority
           />
+          {/* Mobile Orientation Prompt */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5, duration: 1 }}
+            className="md:hidden"
+            style={{
+              position: "absolute",
+              bottom: -40,
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "max-content",
+              fontFamily: "'Rajdhani', sans-serif",
+              fontSize: "10px",
+              fontWeight: 500,
+              letterSpacing: "0.15em",
+              color: "rgba(255,255,255,0.5)",
+              textTransform: "uppercase",
+            }}
+          >
+            Rotate for the best experience
+          </motion.div>
         </div>
       </motion.div>
 
