@@ -32,9 +32,21 @@ body {
   cursor: none;
 }
 
-/* Hide default cursor globally */
-*, *::before, *::after {
-  cursor: none !important;
+/* Hide default cursor globally for non-touch devices */
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}
+
+/* Hide custom cursors and restore defaults on touch devices */
+@media (pointer: coarse) {
+  body, *, *::before, *::after {
+    cursor: auto !important;
+  }
+  #cursor-canvas, .custom-cursor {
+    display: none !important;
+  }
 }
 
 

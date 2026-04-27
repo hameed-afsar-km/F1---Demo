@@ -27,7 +27,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main style={{ background: "#000", minHeight: "100vh" }}>
+    <main style={{ background: "#000", minHeight: "100vh", width: "100%", maxWidth: "100vw", overflowX: "hidden" }}>
       {/* Splash Screen — fixed overlay, exits upward */}
       <AnimatePresence mode="wait">
         {!splashDone && (
