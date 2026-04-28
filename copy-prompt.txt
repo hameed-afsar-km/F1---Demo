@@ -1,0 +1,38 @@
+Create a premium, high-performance 3D Carousel section for a Next.js application using GSAP and CSS 3D transforms. This section should showcase Formula 1 drivers with a cinematic, "Global Elite" aesthetic.
+
+### Core Architecture & Tech Stack:
+- **Framework**: Next.js (Client Component).
+- **Animation**: GSAP (GreenSock) for smooth transitions and the `Draggable` plugin for interactive scrolling.
+- **Styling**: Vanilla CSS/Inline styles with a focus on `perspective` and `preserve-3d` for the 3D depth effect.
+
+### Visual Design & Aesthetics:
+- **Background**: Deep black (#000) with a subtle red radial glow (`rgba(220,0,0,0.1)`) positioned behind the carousel center to create depth.
+- **Typography**: 
+  - Use 'Bebas Neue' for large headings and driver numbers.
+  - Use 'Rajdhani' for subtitles, labels, and fine print.
+- **Card Design**:
+  - Dimensions: Roughly 420px x 525px.
+  - Features: 16px border-radius, 1px subtle white border, and a heavy drop shadow.
+  - Content: High-quality driver background image with a dark gradient overlay at the bottom.
+  - Details: Large, semi-transparent driver numbers (e.g., '16', '44') positioned behind the driver's name in the info overlay.
+
+### 3D Carousel Mechanics:
+- **Pathing**: Cards must be arranged on an elliptical path in 3D space.
+- **Depth Logic**: As cards move along the ellipse (calculated via GSAP progress):
+  - **Scaling**: Cards in front are 100% size; cards in the back scale down to 60%.
+  - **Opacity**: Front cards are fully opaque; back cards fade to 20% opacity.
+  - **Tilt**: Add a subtle `rotationY` tilt based on the card's X position to enhance the 3D feel.
+  - **Z-Index**: Dynamically calculate Z-index so cards in front always overlap those in the back.
+- **Infinite Scroll**: Implement a loop where dragging left or right shifts the `progress` infinitely, rotating the entire set of cards.
+
+### Interaction & UX:
+- **Drag/Swipe**: Use GSAP `Draggable` on a proxy element to control the carousel.
+- **Inertia & Snapping**: Enable inertia so the carousel "coasts" after a fast swipe, and ensure it always snaps to the nearest card on release.
+- **Responsive**: Adjust the horizontal radius of the carousel based on screen width (e.g., wider on desktop, narrower on mobile).
+
+### Layout Elements:
+- **Top Header**: Section label (e.g., "04 / Global Elite" in red Rajdhani) and a large "The Drivers" title.
+- **Footer Hint**: A subtle "← Swipe to Loop →" text at the bottom.
+- **Perspective**: The parent container must have a high `perspective` value (e.g., 2000px) to make the 3D transforms look natural.
+
+Ensure the final component is highly polished, performant, and feels like a premium automotive brand experience.

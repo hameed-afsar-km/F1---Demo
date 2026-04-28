@@ -42,7 +42,14 @@ export default function FooterSection() {
   }, [setInFooter]);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (window.lenis) {
+      window.lenis.scrollTo(0, {
+        duration: 2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   // Parallax Layer 1 & 3: scroll from bottom center

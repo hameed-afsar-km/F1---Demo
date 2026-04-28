@@ -3,6 +3,7 @@ import "./globals.css";
 import { CursorProvider } from "@/context/CursorContext";
 import CanvasCursor from "@/components/CanvasCursor";
 import MainCursor from "@/components/MainCursor";
+import SmoothScroll from "@/components/SmoothScroll";
 import Script from "next/script";
 
 export const metadata: Metadata = {
@@ -38,10 +39,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           strategy="lazyOnload"
         />
         <CursorProvider>
-
-          <MainCursor />
-          <CanvasCursor />
-          {children}
+          <SmoothScroll>
+            <MainCursor />
+            <CanvasCursor />
+            {children}
+          </SmoothScroll>
         </CursorProvider>
       </body>
     </html>
